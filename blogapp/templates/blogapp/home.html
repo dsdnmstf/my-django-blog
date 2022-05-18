@@ -1,0 +1,38 @@
+{% extends 'base.html' %} {% block content %}
+<h1>Home Page</h1>
+{% if request.user.is_authenticated %}
+<h2>Wellcome {{request.user}}!</h2>
+{% else %}
+<h2>Wellcome Guest!</h2>
+
+<div class="card-container">
+    <div class=" row row-cols-1 ">    
+        {% for blog in blogs%}
+        <div class="col d-flex justify-content-center ">
+            <div class="card  p-2">
+                <img src="{{ blog.image.url }}" class="card-img-top w-100 " alt="image">
+                <div class="card-body">
+                    <h5 class="card-title">{{blog.title}}</h5>
+                    <p class="card-text">{{blog.content}}</p>
+                    <p class="text-danger">icons / comments / like</p>
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted">{{blog.last_update}}</small>
+                </div>  
+                <div class="text-center m-2">
+                    <a href="{% url 'detail' blog.id %}">
+                <button type="button" class="btn btn-info w-50">Details</button></a>
+                <a href="{% url 'detail' blog.id %}">
+                <button type="button" class="btn btn-info w-50">Details</button></a>
+                </div>          
+                
+            </div>
+
+
+        </div> 
+
+    {% endfor%}
+    </div>
+    </div>
+
+{% endif %} {% endblock content %}
